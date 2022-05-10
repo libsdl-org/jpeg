@@ -12,8 +12,7 @@ project(jpeg LANGUAGES C VERSION ${LIBJPEG_VERSION})
 
 include(GNUInstallDirs)
 
-add_library(jpeg)
-target_sources(jpeg PRIVATE
+add_library(jpeg
 		jaricom.c jcapimin.c jcapistd.c jcarith.c jccoefct.c jccolor.c
 		jcdctmgr.c jchuff.c jcinit.c jcmainct.c jcmarker.c jcmaster.c
 		jcomapi.c jcparam.c jcprepct.c jcsample.c jctrans.c jdapimin.c
@@ -60,4 +59,8 @@ if(MINGW AND BUILD_SHARED_LIBS)
 		PREFIX lib)
 endif()
 
-install(TARGETS jpeg)
+install(TARGETS jpeg
+	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+	LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+	RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+	PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
