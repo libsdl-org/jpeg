@@ -50,6 +50,14 @@ target_include_directories(jpeg PUBLIC
 set_target_properties(jpeg PROPERTIES
 	SOVERSION "${PROJECT_VERSION_MAJOR}"
 	VERSION "${PROJECT_VERSION}"
-	PUBLIC_HEADER "${jpeg_headers}")
+	PUBLIC_HEADER "${jpeg_headers}"
+	# create libjpeg-9.dll on Windows
+	RUNTIME_OUTPUT_NAME "jpeg-${PROJECT_VERSION_MAJOR}"
+	PREFIX lib)
+
+if(MINGW AND BUILD_SHARED_LIBS)
+	set_target_properties(jpeg PROPERTIES
+		PREFIX lib)
+endif()
 
 install(TARGETS jpeg)
