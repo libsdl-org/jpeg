@@ -20,13 +20,16 @@ add_library(jpeg
 		jddctmgr.c jdhuff.c jdinput.c jdmainct.c jdmarker.c jdmaster.c
 		jdmerge.c jdpostct.c jdsample.c jdtrans.c jerror.c jfdctflt.c
 		jfdctfst.c jfdctint.c jidctflt.c jquant1.c
-		jquant2.c jutils.c jmemmgr.c)
+		jquant2.c jutils.c jmemmgr.c
+)
+add_library(JPEG::JPEG ALIAS jpeg)
 
 set(jpeg_headers
-	jconfig.h
-	jerror.h
-	jmorecfg.h
-	jpeglib.h)
+    jconfig.h
+    jerror.h
+    jmorecfg.h
+    jpeglib.h
+)
 
 if (ANDROID)
 	target_sources(jpeg PRIVATE jmem-android.c)
@@ -44,23 +47,29 @@ target_compile_definitions(jpeg PRIVATE AVOID_TABLES)
 
 target_include_directories(jpeg PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 set_target_properties(jpeg PROPERTIES
 	SOVERSION "${PROJECT_VERSION_MAJOR}"
 	VERSION "${PROJECT_VERSION}"
-	PUBLIC_HEADER "${jpeg_headers}"
 	# create libjpeg-9.dll on Windows
 	RUNTIME_OUTPUT_NAME "jpeg-${PROJECT_VERSION_MAJOR}"
-	PREFIX lib)
+	PREFIX lib
+)
 
 if(MINGW AND BUILD_SHARED_LIBS)
 	set_target_properties(jpeg PROPERTIES
-		PREFIX lib)
+		PREFIX lib
+    )
 endif()
 
 install(TARGETS jpeg
 	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 	LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 	RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-	PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+)
+
+install(FILES ${jpeg_headers}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
