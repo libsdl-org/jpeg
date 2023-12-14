@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.1...3.5)
 
 # extract version out of configure.ac
 file(READ "configure.ac" CONFIGURE_AC)
