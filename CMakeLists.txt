@@ -23,6 +23,7 @@ add_library(jpeg
 		jquant2.c jutils.c jmemmgr.c
 )
 add_library(JPEG::JPEG ALIAS jpeg)
+set_property(TARGET jpeg PROPERTY DEFINE_SYMBOL JPEG_SHARED)
 
 set(jpeg_headers
     jconfig.h
