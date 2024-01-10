@@ -1,7 +1,7 @@
 # Makefile for Independent JPEG Group's software
 
 # This makefile is suitable for Xcode Apple Clang on Apple Darwin/macOS.
-# Tested with Xcode 15.1 (2023),
+# Tested with Xcode 15.2 (2024),
 # Apple clang version 15.0.0 (clang-1500.1.0.2.5),
 # Target: arm64-apple-darwin23.2.0,
 # GNU Make 3.81 (2006).
